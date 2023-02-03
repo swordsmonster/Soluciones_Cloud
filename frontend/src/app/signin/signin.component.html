@@ -1,0 +1,28 @@
+<small *ngIf="signinCompleted">{{ message }}</small>
+
+<div>
+  <label for="email">Email: </label>
+  <input
+    id="email"
+    type="email"
+    name="email"
+    [(ngModel)]="signin.email"
+    placeholder="email"
+  />
+  <br />
+
+  <label for="password">Password: </label>
+  <input
+    id="password"
+    type="password"
+    name="Password"
+    placeholder="password"
+    [(ngModel)]="signin.contrasena"
+  />
+  <br />
+
+  <!--<button (click)="handleSignin()">Registrarse</button>
+
+  <div class="container">
+    <button (click)="handleSignin()">Registrarse</button>-->
+</div>

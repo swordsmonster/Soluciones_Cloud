@@ -1,0 +1,29 @@
+<small *ngIf="failedLogin">{{ errorMessage }}</small>
+
+<div>
+  <label for="email">Email: </label>
+  <input
+    id="email"
+    type="email"
+    name="email"
+    [(ngModel)]="login.email"
+    placeholder="email"
+  />
+  <br />
+
+  <label for="password">Password: </label>
+  <input
+    id="password"
+    type="password"
+    name="Password"
+    placeholder="password"
+    [(ngModel)]="login.contrasena"
+  />
+  <br />
+
+  <button (click)="handleLogin()">Login</button>
+
+  <div class="container">
+    <button (click)="handleSignin()">Registrarse</button>
+  </div>
+</div>

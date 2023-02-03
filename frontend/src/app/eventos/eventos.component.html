@@ -1,0 +1,50 @@
+<h1>Bienvenido {{ name }}.</h1>
+
+<h1>Eventos</h1>
+
+<div class="alert alert-success" *ngIf="message">{{ message }}</div>
+
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Evento</th>
+        <th>Categoria</th>
+        <th>Lugar</th>
+        <th>Direccion</th>
+        <th>Fecha de Inicio</th>
+        <th>Fecha de Fin</th>
+        <th>Tipo de Evento</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let evento of eventos">
+        <td>{{ evento.id }}</td>
+        <td>{{ evento.nombre }}</td>
+        <td>{{ evento.categoria }}</td>
+        <td>{{ evento.lugar }}</td>
+        <td>{{ evento.direccion }}</td>
+        <td>{{ evento.fecha_inicio }}</td>
+        <td>{{ evento.fecha_fin }}</td>
+        <td>{{ evento.tipo }}</td>
+        <td>
+          <button (click)="updateEvent(evento.id)" class="btn btn-success">
+            Update
+          </button>
+        </td>
+        <td>
+          <button (click)="deleteEvent(evento.id)" class="btn btn-warning">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="row">
+    <button (click)="addEvent()" class="btn btn-success">Add</button>
+  </div>
+</div>
