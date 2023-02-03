@@ -1,4 +1,9 @@
-<small *ngIf="signinCompleted">{{ message }}</small>
+<!--<small *ngIf="signinCompleted">{{ message }}</small>
+  <button (click)="handleSignin()">Registrarse</button>
+
+  <div class="container">
+    <button (click)="handleSignin()">Registrarse</button>
+</div>-->
 
 <div>
   <label for="email">Email: </label>
@@ -6,7 +11,7 @@
     id="email"
     type="email"
     name="email"
-    [(ngModel)]="signin.email"
+    [(ngModel)]="email"
     placeholder="email"
   />
   <br />
@@ -16,13 +21,14 @@
     id="password"
     type="password"
     name="Password"
+    [(ngModel)]="contrasena"
     placeholder="password"
-    [(ngModel)]="signin.contrasena"
   />
   <br />
 
-  <!--<button (click)="handleSignin()">Registrarse</button>
+  <button (click)="handleSignin()">Registrarse</button>
 
   <div class="container">
-    <button (click)="handleSignin()">Registrarse</button>-->
+    <button (click)="handleCancel()">Cancelar</button>
+  </div>
 </div>

@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 // Agregado
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Evento } from './evento';
-// Suscribiendose al servicio
-import { EventosService } from './eventos.service';
+import { ServicioAPIService } from '../Servicios/ServicioAPI.service';
+
 
 @Component({
   selector: 'app-eventos',
@@ -18,17 +20,18 @@ export class EventosComponent implements OnInit {
   message = ''
 
   // Modificado
-  constructor(private eventosService: EventosService) { }
+  constructor(
+    private router: Router,
+    private servicioAPIService: ServicioAPIService
+    ) { }
+
+  ngOnInit() {
+    this.getListaEventos();
+  }
 
   // Agregado
   getListaEventos(){
-    this.eventosService.getEventos('').subscribe(cs => {this.eventos = cs;});
-  }
-
-  ngOnInit() {
-    // Agregado - Mock de prueba
-    //this.canciones = [new Cancion("Prueba", 1, 10, "Memo")]
-    this.getListaEventos();
+    this.servicioAPIService.getEventos('').subscribe(cs => {this.eventos = cs;});
   }
 
   addEvent(): void {

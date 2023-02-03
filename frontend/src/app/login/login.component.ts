@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 // Agregado
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Login } from './login';
 import { Loginresponse } from './loginresponse';
-// Suscribiendose al servicio
-import { LoginService } from './login.service';
+import { ServicioAPIService } from '../Servicios/ServicioAPI.service';
 
 
 @Component({
@@ -16,41 +16,34 @@ import { LoginService } from './login.service';
 // implements OnInit
 export class LoginComponent implements OnInit{
 
-  public login: Login;
+  //public login: Login;
   loginresponse: Loginresponse;
-  router: Router
+  respuesta: any = [];
 
   errorMessage = "Datos Incorrectos";
   failedLogin = false;
 
-  //email = ""
-  //password = ""
-  //email: String = "";
-  //password: String = "";
+  email = ""
+  contrasena = ""
 
-  //constructor(private router: Router) { }
-  constructor(private LoginService: LoginService) { }
+  constructor(
+    private ServicioAPI: ServicioAPIService,
+    private router: Router
+    ) { }
 
   ngOnInit() {
-    this.login = {
-      id: 0,
-      email: '',
-      contrasena: ''
-    }
-
-    //this.handleLogin();
+    //
   }
+
 
   handleLogin() : void {
 
-    //this.LoginService.postLogin(this.email, this.password).subscribe(cs => {this.loginresponse = cs;});
-    this.LoginService.postLogin(this.login.email, this.login.contrasena).subscribe(cs => {this.loginresponse = cs;});
+    this.ServicioAPI.postLogin(this.email, this.contrasena).subscribe(cs => {this.loginresponse = cs;
     console.log(this.loginresponse.mensaje)
 
-    // this.eventosService.getEventos('').subscribe(cs => {this.eventos = cs;})
     if(this.loginresponse.mensaje === "Inicio de sesión exitoso") {
       // Redirect to Welcome Page
-      //this.router.navigate(['eventos', this.login.email])
+      this.router.navigate(['eventos', '1'])
       this.failedLogin = false
 
     } else {
@@ -58,6 +51,7 @@ export class LoginComponent implements OnInit{
     }
 
     console.log(this.failedLogin)
+    });
   }
 
   handleSignin() : void {

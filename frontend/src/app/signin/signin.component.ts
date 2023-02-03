@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Signin } from './signin';
-import { SigninService } from './signin.service';
 import { Signinresponse } from './signinresponse';
+import { ServicioAPIService } from '../Servicios/ServicioAPI.service';
 
 @Component({
   selector: 'app-signin',
@@ -11,31 +13,32 @@ import { Signinresponse } from './signinresponse';
 
 export class SigninComponent implements OnInit {
 
-  public signin: Signin;
   signinresponse: Signinresponse;
+
+  email = ""
+  contrasena = ""
+
   signinCompleted = false
   message = "Registro completado!"
 
-  constructor(private signinService: SigninService) { }
+  constructor(
+    private servicioAPIService: ServicioAPIService,
+    private router: Router
+    ) { }
 
   ngOnInit() {
-    this.signin = {
-      email: '',
-      contrasena: ''
-    }
-
+    //
   }
 
   handleSignin() : void {
 
     //this.LoginService.postLogin(this.email, this.password).subscribe(cs => {this.loginresponse = cs;});
-    this.signinService.postSignin(this.signin.email, this.signin.contrasena).subscribe(cs => {this.signinresponse = cs;});
+    this.servicioAPIService.postSignin(this.email, this.contrasena).subscribe(cs => {this.signinresponse = cs;
     console.log(this.signinresponse.mensaje)
 
-    // this.eventosService.getEventos('').subscribe(cs => {this.eventos = cs;})
     if(this.signinresponse.mensaje === "usuario creado exitosamente") {
       // Redirect to Welcome Page
-      //this.router.navigate(['eventos', this.login.email])
+      this.router.navigate(['login'])
       this.signinCompleted = false
 
     } else {
@@ -43,6 +46,12 @@ export class SigninComponent implements OnInit {
     }
 
     console.log(this.signinCompleted)
+    });
+
+  }
+
+  handleCancel() : void {
+    this.router.navigate(['login'])
   }
 }
 
